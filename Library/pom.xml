@@ -27,7 +27,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.1.0</version>
         <configuration>
-          <mainClass>edu.eci.cvds.tdd.library.App</mainClass>
+          <mainClass>edu.eci.cvds.tdd.App</mainClass>
         </configuration>
       </plugin>
     </plugins>
