@@ -18,11 +18,11 @@ public class Library {
     private final Map&lt;Book, Integer&gt; books;
     private final List&lt;Loan&gt; loans;
 
-<span class="nc" id="L21">    public Library() {</span>
-<span class="nc" id="L22">        users = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L23">        books = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L24">        loans = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L25">    }</span>
+<span class="fc" id="L21">    public Library() {</span>
+<span class="fc" id="L22">        users = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L23">        books = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L24">        loans = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L25">    }</span>
 
     /**
      * Adds a new {@link edu.eci.cvds.tdd.library.book.Book} into the system, the book is store in a Map that contains
@@ -35,9 +35,18 @@ public class Library {
      * @return true if the book was stored false otherwise.
      */
     public boolean addBook(Book book) {
-        //TODO Implement the logic to add a new book into the map.
-<span class="nc" id="L39">        return false;</span>
+        try {
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">            if (books.containsKey(book)) {</span>
+<span class="nc" id="L40">                books.put(book, books.get(book) + 1);</span>
+            } else {
+<span class="fc" id="L42">                books.put(book, 1);</span>
+            }
+<span class="fc" id="L44">            return true;</span>
+<span class="nc" id="L45">        } catch (Exception e) {</span>
+<span class="nc" id="L46">            return false;</span>
+        }
     }
+    
 
     /**
      * This method creates a new loan with for the User identify by the userId and the book identify by the isbn,
@@ -54,7 +63,7 @@ public class Library {
      */
     public Loan loanABook(String userId, String isbn) {
         //TODO Implement the login of loan a book to a user based on the UserId and the isbn.
-<span class="nc" id="L57">        return null;</span>
+<span class="nc" id="L66">        return null;</span>
     }
 
     /**
@@ -68,12 +77,15 @@ public class Library {
      */
     public Loan returnLoan(Loan loan) {
         //TODO Implement the login of loan a book to a user based on the UserId and the isbn.
-<span class="nc" id="L71">        return null;</span>
+<span class="nc" id="L80">        return null;</span>
     }
 
     public boolean addUser(User user) {
-<span class="nc" id="L75">        return users.add(user);</span>
+<span class="nc" id="L84">        return users.add(user);</span>
     }
 
+    public Map&lt;Book,Integer&gt; getBooks(){
+<span class="fc" id="L88">        return books;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
