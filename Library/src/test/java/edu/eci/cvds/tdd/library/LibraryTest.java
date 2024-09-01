@@ -22,6 +22,7 @@ public class LibraryTest {
         assertEquals(1, (int) library.getBooks().get(book));
     }
 
+    @Test
     public void shouldLoanABook(){
         Library library = new Library();
         Book book = new Book("title1", "author1", "ISBN1");
