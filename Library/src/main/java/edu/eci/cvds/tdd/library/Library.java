@@ -2,8 +2,10 @@ package edu.eci.cvds.tdd.library;
 
 import edu.eci.cvds.tdd.library.book.Book;
 import edu.eci.cvds.tdd.library.loan.Loan;
+import edu.eci.cvds.tdd.library.loan.LoanStatus;
 import edu.eci.cvds.tdd.library.user.User;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,9 +37,19 @@ public class Library {
      * @return true if the book was stored false otherwise.
      */
     public boolean addBook(Book book) {
-        //TODO Implement the logic to add a new book into the map.
-        return false;
+        try {
+            //Verificamos si el libro está en el hash de libros
+            if (books.containsKey(book)) {
+                books.put(book, books.get(book) + 1);
+            } else {
+                books.put(book, 1);
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
+    
 
     /**
      * This method creates a new loan with for the User identify by the userId and the book identify by the isbn,
@@ -52,10 +64,10 @@ public class Library {
      *
      * @return The new created loan.
      */
-    public Loan loanABook(String userId, String isbn) {
-        //TODO Implement the login of loan a book to a user based on the UserId and the isbn.
+    public Loan loanABook(String userId, String isbn){ //throws UserNotFoundException, BookNotAvailableException, ActiveLoanExistsException {
         return null;
     }
+
 
     /**
      * This method return a loan, meaning that the amount of books should be increased by 1, the status of the Loan
@@ -75,4 +87,7 @@ public class Library {
         return users.add(user);
     }
 
+    public Map<Book,Integer> getBooks(){
+        return books;
+    }
 }
