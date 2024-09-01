@@ -65,7 +65,53 @@ public class Library {
      * @return The new created loan.
      */
     public Loan loanABook(String userId, String isbn){ //throws UserNotFoundException, BookNotAvailableException, ActiveLoanExistsException {
-        return null;
+        User user = null;
+        
+        //Verificamos si el usuario existe
+        for (User u : users) {
+            if (u.getId().equals(userId)) {
+                user = u;
+                break;
+            }
+        }
+        
+        if (user == null) {
+            //throw new UserNotFoundException("User not found: " + userId);
+        }
+
+        //Verificamos si el usuario ya tiene un préstamo activo del mismo libro
+        for (Loan l : loans) {
+            if (l.getBook().getIsbn().equals(isbn) && l.getUser().getId().equals(userId) && l.getStatus() == LoanStatus.ACTIVE) {
+                //throw new ActiveLoanExistsException("The user already has an active loan for this book.");
+            }
+        }
+
+        Book loanedBook = null;
+        
+        //Verificamos si el libro está disponible
+        for (Book b : books.keySet()) {
+            if (b.getIsbn().equals(isbn)) {
+                loanedBook = b;
+                break;
+            }
+        }
+
+        if (loanedBook == null || books.get(loanedBook) == 0) {
+            //throw new BookNotAvailableException("Book not available: " + isbn);
+        }
+
+        //Creamos y el préstamo
+        Loan newLoan = new Loan();
+        newLoan.setUser(user);
+        newLoan.setBook(loanedBook);
+        newLoan.setLoanDate(LocalDateTime.now());
+        newLoan.setStatus(LoanStatus.ACTIVE);
+        
+        // Disminuir la cantidad disponible del libro
+        books.put(loanedBook, books.get(loanedBook) - 1);
+
+        loans.add(newLoan);
+        return newLoan;
     }
 
 
