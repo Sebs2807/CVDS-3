@@ -21,7 +21,6 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
-    <!-- Propiedades de SonarQube -->
     <sonar.projectKey>library</sonar.projectKey>
     <sonar.projectName>library</sonar.projectName> 
     <sonar.host.url>http://localhost:9000</sonar.host.url>

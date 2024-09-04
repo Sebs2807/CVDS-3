@@ -41,7 +41,7 @@ public class Library {
             //Verificamos si el libro está en el hash de libros
 <span class="pc bpc" id="L42" title="1 of 2 branches missed.">            if (books.containsKey(book)) {</span>
 <span class="nc" id="L43">                books.put(book, books.get(book) + 1);</span>
-            } else {
+<span class="nc" id="L44">            } else {</span>
 <span class="fc" id="L45">                books.put(book, 1);</span>
             }
 <span class="fc" id="L47">            return true;</span>
@@ -73,18 +73,18 @@ public class Library {
 <span class="fc" id="L73">                user = u;</span>
 <span class="fc" id="L74">                break;</span>
             }
-<span class="nc" id="L76">        }</span>
+        }
         
-<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        if (user == null) {</span>
+        if (user == null) {
             //throw new UserNotFoundException(&quot;User not found: &quot; + userId);
         }
 
         //Verificamos si el usuario ya tiene un préstamo activo del mismo libro
 <span class="pc bpc" id="L83" title="1 of 2 branches missed.">        for (Loan l : loans) {</span>
-<span class="nc bnc" id="L84" title="All 6 branches missed.">            if (l.getBook().getIsbn().equals(isbn) &amp;&amp; l.getUser().getId().equals(userId) &amp;&amp; l.getStatus() == LoanStatus.ACTIVE) {</span>
+<span class="nc bnc" id="L84" title="All 4 branches missed.">            if (l.getBook().getIsbn().equals(isbn) &amp;&amp; l.getUser().getId().equals(userId) &amp;&amp; l.getStatus() == LoanStatus.ACTIVE) {</span>
                 //throw new ActiveLoanExistsException(&quot;The user already has an active loan for this book.&quot;);
             }
-<span class="nc" id="L87">        }</span>
+        }
 
 <span class="fc" id="L89">        Book loanedBook = null;</span>
         
@@ -94,9 +94,9 @@ public class Library {
 <span class="fc" id="L94">                loanedBook = b;</span>
 <span class="fc" id="L95">                break;</span>
             }
-<span class="nc" id="L97">        }</span>
+        }
 
-<span class="pc bpc" id="L99" title="2 of 4 branches missed.">        if (loanedBook == null || books.get(loanedBook) == 0) {</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        if (loanedBook == null || books.get(loanedBook) == 0) {</span>
             //throw new BookNotAvailableException(&quot;Book not available: &quot; + isbn);
         }
 

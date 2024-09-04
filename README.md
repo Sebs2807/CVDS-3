@@ -27,3 +27,13 @@ Probamos el test de agregar un libro, pero al no haber un codigo implementado, f
 
 Después de agregar codigo, el test pasa correctamente
 ![alt text](image-9.png)
+
+Parte de docker y sonarqube
+Una vez iniciada la sesión como admin en localhost:9000, generamos el token
+![alt text](image-10.png)
+
+Después de poner el comando dado para probar que todo haya quedado bien en sonar, arroja lo siguiente
+![alt text](image-11.png)
+
+En localhost:9000, evidenciamos que funcionó el proyecto, solo nos falta una prueba para lograr la cobertura que se espera
+![alt text](image-12.png)
