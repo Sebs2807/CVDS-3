@@ -1,3 +1,4 @@
+edu\eci\cvds\tdd\library\exceptions\LibraryException.class
 edu\eci\cvds\tdd\library\book\Book.class
 edu\eci\cvds\tdd\library\loan\Loan.class
 edu\eci\cvds\tdd\library\Library.class

@@ -1,6 +1,7 @@
 package edu.eci.cvds.tdd.library;
 
 import edu.eci.cvds.tdd.library.book.Book;
+import edu.eci.cvds.tdd.library.exceptions.LibraryException;
 import edu.eci.cvds.tdd.library.loan.Loan;
 import edu.eci.cvds.tdd.library.loan.LoanStatus;
 import edu.eci.cvds.tdd.library.user.User;
@@ -64,7 +65,7 @@ public class Library {
      *
      * @return The new created loan.
      */
-    public Loan loanABook(String userId, String isbn){ //throws UserNotFoundException, BookNotAvailableException, ActiveLoanExistsException {
+    public Loan loanABook(String userId, String isbn) throws LibraryException{
         User user = null;
         
         //Verificamos si el usuario existe
@@ -76,13 +77,13 @@ public class Library {
         }
         
         if (user == null) {
-            //throw new UserNotFoundException("User not found: " + userId);
+            throw new LibraryException(LibraryException.USER_NOT_FOUND);
         }
 
         //Verificamos si el usuario ya tiene un préstamo activo del mismo libro
         for (Loan l : loans) {
             if (l.getBook().getIsbn().equals(isbn) && l.getUser().getId().equals(userId) && l.getStatus() == LoanStatus.ACTIVE) {
-                //throw new ActiveLoanExistsException("The user already has an active loan for this book.");
+                throw new LibraryException(LibraryException.ACTIVE_LOAN_EXISTS);
             }
         }
 
@@ -97,7 +98,7 @@ public class Library {
         }
 
         if (loanedBook == null || books.get(loanedBook) == 0) {
-            //throw new BookNotAvailableException("Book not available: " + isbn);
+            throw new LibraryException(LibraryException.BOOK_NOT_AVAILABLE);
         }
 
         //Creamos y el préstamo
@@ -124,9 +125,27 @@ public class Library {
      *
      * @return the loan with the RETURNED status.
      */
-    public Loan returnLoan(Loan loan) {
-        //TODO Implement the login of loan a book to a user based on the UserId and the isbn.
-        return null;
+    public Loan returnLoan(Loan loan) throws LibraryException{
+        //Verificamos que el préstamo exista
+        if(!loans.contains(loan)){
+            throw new LibraryException(LibraryException.LOAN_NOT_FOUND);
+        }
+
+        //Verificamos que el préstamo no haya sido ya devuelto
+        if(loan.getStatus() == LoanStatus.RETURNED){
+            throw new LibraryException(LibraryException.LOAN_ALREADY_RETURNED);
+        }
+
+        //Asignamos el estado de devuelto al préstamo
+        loan.setStatus(LoanStatus.RETURNED);
+
+        //Asignamos la fecha de devolución a la fecha actual
+        loan.setReturnDate(LocalDateTime.now());
+
+        Book book = loan.getBook();
+        books.put(book, books.get(book) + 1);
+
+        return loan;
     }
 
     public boolean addUser(User user) {
@@ -135,5 +154,9 @@ public class Library {
 
     public Map<Book,Integer> getBooks(){
         return books;
+    }
+
+    public List<User> getUsers(){
+        return users;
     }
 }
